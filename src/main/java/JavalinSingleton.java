@@ -1,5 +1,7 @@
 
 
+import org.eclipse.jetty.server.Authentication.User;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 
@@ -23,7 +25,9 @@ public class JavalinSingleton {
         app.post("/echo", ctx -> {
             
             //implement logic here
-                
+            String jsonString = ctx.body();
+            Song user = om.readValue(jsonString, Song.class);
+            ctx.json(user);
         });
 
         /**
@@ -36,7 +40,10 @@ public class JavalinSingleton {
         app.post("/changeartisttobeatles", ctx -> {
 
             //implement logic here
-               
+            String jsonString = ctx.body();
+            Song user = om.readValue(jsonString, Song.class);
+            user.setArtistName("Beatles");
+            ctx.json(user);
         });
 
 
